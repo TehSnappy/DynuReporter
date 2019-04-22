@@ -38,7 +38,7 @@ defmodule DynuReporter.MixProject do
     [
       files: ~w(lib .formatter.exs mix.exs README* LICENSE*),
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/teh-snappy/dynu_reporter"}
+      links: %{"GitHub" => "https://github.com/TehSnappy/DynuReporter"}
     ]
   end
 
