@@ -19,9 +19,6 @@ defmodule DynuReporter.Heartbeat do
   def init(state) do
     HTTPoison.start()
 
-    # force a quick update on start, but don't persist it
-    schedule_heartbeat(%{state | polling_interval: 100})
-
     {:ok, state}
   end
 
@@ -31,6 +28,15 @@ defmodule DynuReporter.Heartbeat do
 
   def stop_polling() do
     GenServer.call(Heartbeat, :stop_polling)
+  end
+
+  def update_now do
+    GenServer.call(Heartbeat, :update_now)
+  end
+
+  def handle_call(:update_now, _, state = %State{}) do
+    schedule_heartbeat(%{state | polling_interval: 100})
+    {:reply, state, state}
   end
 
   def handle_call(:get_state, _, state = %State{}) do
